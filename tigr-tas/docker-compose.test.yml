@@ -1,0 +1,41 @@
+services:
+
+  api:
+    env_file:
+      - .env.test
+    ports: ["8001:8000"]
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      db_test:
+        condition: service_healthy
+      redis_test:
+        condition: service_healthy
+
+  db_test:
+    image: postgres:16-alpine
+    ports: ["5433:5432"]
+    environment:
+      POSTGRES_DB: tigr_tas_test
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U test_user -d tigr_tas_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis_test:
+    image: redis:7-alpine
+    ports: ["6380:6379"]
+    command: redis-server --requirepass test_password --maxmemory 512mb --maxmemory-policy allkeys-lru
+    tmpfs:
+      - /data
+    healthcheck: 
+      test: ["CMD-SHELL", "redis-cli -a test_password ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
