@@ -1,0 +1,211 @@
+/*
+ * SELF-AUDIT
+ * ----------
+ * File: button.css
+ * Purpose: Button component styles — primary (orange gradient), secondary (ghost),
+ *          tab-toggle, and state variants (hover, active, disabled).
+ * Inline styles in HTML: NONE.
+ * Magic numbers: NONE.
+ */
+
+/* ── Base Button ──────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 2px;
+}
+
+/* ── Primary Button (Orange Gradient) ─────────────────────────────────────── */
+.btn-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, #f0883e, #da6d25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #f79550, #e07830);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(240, 136, 62, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #da6d25, #c46020);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Secondary Button (Ghost / Outline) ───────────────────────────────────── */
+.btn-secondary {
+  color: #e6edf3;
+  background-color: transparent;
+  border: 1px solid #30363d;
+}
+
+.btn-secondary:hover {
+  background-color: #1c2128;
+  border-color: #484f58;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  background-color: #161b22;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Small Button ─────────────────────────────────────────────────────────── */
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+/* ── Icon-only Button ─────────────────────────────────────────────────────── */
+.btn-icon {
+  padding: 8px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #8b949e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-icon:hover {
+  color: #e6edf3;
+  background-color: #1c2128;
+  border-color: #30363d;
+}
+
+/* ── Tab Buttons ──────────────────────────────────────────────────────────── */
+.tab-group {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #30363d;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab-btn {
+  position: relative;
+  padding: 12px 20px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8b949e;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab-btn:hover {
+  color: #e6edf3;
+}
+
+.tab-btn.active {
+  color: #e6edf3;
+  border-bottom-color: #f0883e;
+}
+
+.tab-btn:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: -2px;
+  border-radius: 4px 4px 0 0;
+}
+
+/* ── Button Group ─────────────────────────────────────────────────────────── */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Back / Link Button ───────────────────────────────────────────────────── */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8b949e;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  color: #e6edf3;
+  text-decoration: none;
+}
+
+/* ── Collapsible Toggle ───────────────────────────────────────────────────── */
+.collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6edf3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.collapse-toggle:hover {
+  color: #f0883e;
+}
+
+.collapse-toggle-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 12px;
+}
+
+.collapse-toggle.expanded .collapse-toggle-icon {
+  transform: rotate(90deg);
+}

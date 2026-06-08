@@ -1,0 +1,327 @@
+/*
+ * SELF-AUDIT
+ * ----------
+ * File: results_table.css
+ * Purpose: Styles for the scored-pair results table — scrollable container,
+ *          sticky header/rank column, score coloring, detail panel.
+ * Inline styles in HTML: NONE.
+ * Magic numbers: NONE.
+ */
+
+/* ── Scroll Container ─────────────────────────────────────────────────────── */
+.results-scroll-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  background-color: #0d1117;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Table ────────────────────────────────────────────────────────────────── */
+.results-table {
+  width: 100%;
+  min-width: 1600px; /* ensure horizontal scroll on smaller screens */
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.results-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #21262d;
+  color: #8b949e;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 12px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #30363d;
+  user-select: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.results-table thead th:hover {
+  color: #e6edf3;
+}
+
+.results-table thead th.sorted-asc::after {
+  content: ' ▲';
+  font-size: 9px;
+}
+
+.results-table thead th.sorted-desc::after {
+  content: ' ▼';
+  font-size: 9px;
+}
+
+/* ── Sticky Rank Column ───────────────────────────────────────────────────── */
+.results-table th.col-rank,
+.results-table td.col-rank {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  min-width: 60px;
+  width: 60px;
+}
+
+.results-table thead th.col-rank {
+  z-index: 30; /* above both sticky row and sticky header */
+  background-color: #21262d;
+}
+
+/* ── Rows ─────────────────────────────────────────────────────────────────── */
+.results-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.results-table tbody tr:nth-child(even) td {
+  background-color: #0d1117;
+}
+
+.results-table tbody tr:nth-child(odd) td {
+  background-color: #161b22;
+}
+
+/* sticky rank needs explicit bg to avoid transparency on scroll */
+.results-table tbody tr:nth-child(even) td.col-rank {
+  background-color: #0d1117;
+}
+
+.results-table tbody tr:nth-child(odd) td.col-rank {
+  background-color: #161b22;
+}
+
+.results-table tbody tr:hover td {
+  background-color: #1c2128;
+}
+
+.results-table tbody tr.row-selected td {
+  background-color: #1c2128;
+  border-bottom-color: transparent;
+}
+
+/* ── Cells ────────────────────────────────────────────────────────────────── */
+.results-table td {
+  padding: 8px 12px;
+  color: #e6edf3;
+  border-bottom: 1px solid #21262d;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Sequence cells — monospace */
+.cell-sequence {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Score Coloring ───────────────────────────────────────────────────────── */
+.score-high {
+  color: #3fb950;
+  font-weight: 600;
+}
+
+.score-medium {
+  color: #d29922;
+  font-weight: 600;
+}
+
+.score-low {
+  color: #f85149;
+  font-weight: 600;
+}
+
+/* Score bar — small inline indicator */
+.score-bar {
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.score-bar-high {
+  background-color: #3fb950;
+}
+
+.score-bar-medium {
+  background-color: #d29922;
+}
+
+.score-bar-low {
+  background-color: #f85149;
+}
+
+/* ── N/A Cells ────────────────────────────────────────────────────────────── */
+.cell-na {
+  font-style: italic;
+  color: #484f58;
+}
+
+/* ── Warning Cell ─────────────────────────────────────────────────────────── */
+.cell-warning {
+  color: #f0883e;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.warning-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Detail Panel (slide-down) ────────────────────────────────────────────── */
+.detail-row {
+  display: none;
+}
+
+.detail-row.visible {
+  display: table-row;
+}
+
+.detail-row td {
+  padding: 0;
+  border-bottom: 2px solid #30363d;
+}
+
+.detail-panel {
+  background-color: #1c2128;
+  padding: 20px 24px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #e6edf3;
+}
+
+.detail-value.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+}
+
+.detail-warnings {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #30363d;
+}
+
+.detail-warning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  color: #f0883e;
+}
+
+/* ── Controls Bar (filter, search, export) ────────────────────────────────── */
+.results-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  flex-wrap: wrap;
+}
+
+.results-search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.results-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.results-filter label {
+  text-transform: none;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.results-filter input[type="number"] {
+  width: 80px;
+}
+
+.results-count {
+  color: #8b949e;
+  font-size: 13px;
+  margin-left: auto;
+}
+
+/* ── Summary Stat Badges ──────────────────────────────────────────────────── */
+.summary-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  min-width: 140px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #e6edf3;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

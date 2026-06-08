@@ -1,0 +1,222 @@
+/*
+ * SELF-AUDIT
+ * ----------
+ * File: seq_overview.css
+ * Purpose: Sequence overview bar — scrollable nucleotide display with position
+ *          ruler, spacer highlights, and source badges.
+ * Inline styles in HTML: NONE.
+ * Magic numbers: NONE — 11px is the minimum legible monospace size for dense
+ *                nucleotide display.
+ */
+
+/* ── Overview Container ───────────────────────────────────────────────────── */
+.seq-overview {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.seq-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.seq-overview-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Source Badge ──────────────────────────────────────────────────────────── */
+.source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e6edf3;
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.source-badge-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #3fb950;
+}
+
+.source-badge-ncbi .source-badge-dot {
+  background-color: #58a6ff;
+}
+
+.source-badge-ensembl .source-badge-dot {
+  background-color: #bc8cff;
+}
+
+.source-badge-fasta .source-badge-dot {
+  background-color: #d29922;
+}
+
+.source-badge-raw .source-badge-dot {
+  background-color: #3fb950;
+}
+
+/* ── Scrollable Sequence Track ────────────────────────────────────────────── */
+.seq-track-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #21262d;
+  border-radius: 4px;
+  background-color: #010409;
+}
+
+.seq-track {
+  display: inline-block;
+  min-width: 100%;
+  padding: 8px 12px;
+}
+
+/* ── Position Ruler ───────────────────────────────────────────────────────── */
+.seq-ruler {
+  display: flex;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 10px;
+  color: #484f58;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  user-select: none;
+  height: 18px;
+  position: relative;
+}
+
+.seq-ruler-tick {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+}
+
+.seq-ruler-tick::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 6px;
+  background-color: #30363d;
+  margin-top: 1px;
+}
+
+/* Major ticks — every 10bp */
+.seq-ruler-tick-major {
+  color: #6e7681;
+}
+
+.seq-ruler-tick-major::after {
+  height: 10px;
+  background-color: #484f58;
+}
+
+/* ── Nucleotide Sequence ──────────────────────────────────────────────────── */
+.seq-nucleotides {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #8b949e;
+  white-space: nowrap;
+  letter-spacing: 0.08em;
+  user-select: text;
+}
+
+/* Individual nucleotide characters for highlighting */
+.seq-char {
+  display: inline;
+}
+
+/* ── Spacer Highlights ────────────────────────────────────────────────────── */
+.seq-highlight-a {
+  background-color: rgba(240, 136, 62, 0.25);
+  color: #f0883e;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.seq-highlight-b {
+  background-color: rgba(88, 166, 255, 0.25);
+  color: #58a6ff;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.seq-highlight-overlap {
+  background-color: rgba(188, 140, 255, 0.3);
+  color: #bc8cff;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+/* ── Legend ────────────────────────────────────────────────────────────────── */
+.seq-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #21262d;
+}
+
+.seq-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #8b949e;
+}
+
+.seq-legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.seq-legend-swatch-a {
+  background-color: rgba(240, 136, 62, 0.4);
+  border: 1px solid #f0883e;
+}
+
+.seq-legend-swatch-b {
+  background-color: rgba(88, 166, 255, 0.4);
+  border: 1px solid #58a6ff;
+}
+
+/* ── Sequence Info ────────────────────────────────────────────────────────── */
+.seq-info {
+  display: flex;
+  gap: 20px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6e7681;
+}
+
+.seq-info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.seq-info-value {
+  color: #8b949e;
+  font-weight: 500;
+}

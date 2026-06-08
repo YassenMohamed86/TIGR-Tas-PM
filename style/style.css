@@ -1,0 +1,206 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 juil. 2014, 16:26:59
+    Author     : JB
+*/
+#bd
+{   
+    width:100%;
+    /* margin-left:auto;*/
+    /*margin-right:auto;*/
+}
+
+div.introtext
+{   
+    line-height:28px;
+    margin-top:10px;
+    margin-bottom:15px;    
+    text-align: left;
+}
+div.title
+{    
+    font-family: futura, Helvetica, ColabLig, Helvetica, Arial, sans-serif;
+    font-size: larger;
+    display:inline-box;
+    /*text-shadow: 1px 2px 1px #ddd;*/
+    text-align: left;
+}
+div.substep
+{
+    margin-top:   10px;
+    margin-bottom:10px;
+    text-align: left;
+}
+div.substep table td
+{
+    width:100%;
+    border:none;
+}
+div.substep table td.infopoint
+{
+    text-align:right;
+}
+img.infopoint
+{
+    vertical-align: bottom;
+    margin-bottom:-2px;
+    width:30px;
+}
+img.infopoint:hover
+{
+    cursor:pointer;
+}
+img.help
+{
+    vertical-align: bottom;
+    text-align: right;
+    width:20px;
+}
+
+small
+{
+font-size:78%;
+line-height:110%;
+}
+
+div.helptext
+{
+    display:none;
+    font-size:smaller;
+    font-style:oblique;
+    margin-top:10px;    
+}
+div.networking_panel_horizontal
+{
+    display:none;     
+    position:relative;    
+    background-color: rgba(300,300,300,0.9);        
+    
+    margin-top:0px;
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    padding:10px;
+    
+    border-radius:5px;
+    
+    -moz-box-shadow:    0 0 15px 3px rgba(47, 129, 203, 0.1);
+    box-shadow:         0 0 15px 3px rgba(47, 129, 203, 0.1);
+    -webkit-box-shadow: 0 0 15px 3px rgba(47, 129, 203, 0.1);
+}
+div.networking_panel
+{
+    float:right;
+    display:inline-box;
+    position:fixed;
+    right:2.5%;
+    background-color: rgba(300,300,300,0.9);
+    
+    margin:10px;
+    margin-top:0px;
+    margin-left:0px;
+    
+    padding:10px;
+    padding-left:5px;
+    padding-right:5px;
+    
+    border-radius:5px;
+    
+    -moz-box-shadow:    0 0 15px 3px rgba(47, 129, 203, 0.1);
+    box-shadow:         0 0 15px 3px rgba(47, 129, 203, 0.1);
+    -webkit-box-shadow: 0 0 15px 3px rgba(47, 129, 203, 0.1);
+}
+@media screen and (max-width: 1300px)
+{
+    div.networking_panel
+    {
+        display: none !important;
+    }
+    div.networking_panel_horizontal
+    {
+        display:block !important;
+    }
+    div.introtext
+    {
+        display: none !important;
+    }
+}
+
+tr:target 
+{
+    background-color: LightYellow;
+    border-radius: 5px;
+    padding: 5px;
+    outline: solid blue;
+}
+
+div.steps
+{
+    font-family: ColabBol;
+    text-decoration: underline;
+}
+table 
+{
+    border-collapse:collapse;
+}
+td, th
+{
+    border:1px solid black;
+    padding:4px;
+    vertical-align:top;
+    text-align:left;
+    width:auto;    
+}
+
+::-webkit-scrollbar
+{
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+
+table.footertable td
+{
+    border:none;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+ div.windowstep
+ {
+    height:auto;
+    display:inline-block;
+    width:32.25%;
+    vertical-align:top;
+    margin:1%;    
+ }
+ div.speciesname
+ {
+     display:inline;
+ }
+ div.about-us
+ {
+     margin-top:10px;
+     margin-left:auto;
+     margin-right:auto;
+     text-align:justify;
+     display:none;
+     width:40%;
+ }
+ 
+ tr.hiddenExonMatch
+ {
+     display:none;
+ }
+

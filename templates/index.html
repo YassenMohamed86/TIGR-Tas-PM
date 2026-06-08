@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIGR-Tas Dual-Guide RNA Scoring Platform</title>
+    <link rel="stylesheet" href="/static/css/style_general.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="/static/css/button.css">
+    <link rel="stylesheet" href="/static/css/tooltipster.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>TIGR-Tas Dual-Guide RNA Scoring Platform</h1>
+    </nav>
+    <main>
+        {% if error %}
+        <div class="error-box">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
+        <form action="/analyze" method="POST" enctype="multipart/form-data" id="main-form">
+            <input type="hidden" name="input_type" id="input_type" value="raw">
+            
+            <div class="tabs">
+                <button type="button" class="tab-button active" data-tab="raw">Raw Sequence</button>
+                <button type="button" class="tab-button" data-tab="fasta">FASTA Upload</button>
+                <button type="button" class="tab-button" data-tab="ncbi">NCBI Fetch</button>
+                <button type="button" class="tab-button" data-tab="ensembl">Ensembl Fetch</button>
+            </div>
+
+            <div class="tab-content active" id="tab-raw">
+                <label for="raw_sequence">Raw DNA Sequence</label>
+                <textarea id="raw_sequence" name="raw_sequence" rows="6"></textarea>
+            </div>
+
+            <div class="tab-content" id="tab-fasta">
+                <label for="fasta_file">Upload FASTA File</label>
+                <input type="file" id="fasta_file" name="fasta_file" accept=".fa,.fasta">
+            </div>
+
+            <div class="tab-content" id="tab-ncbi">
+                <label for="ncbi_gene">Gene Name</label>
+                <input type="text" id="ncbi_gene" name="ncbi_gene">
+                
+                <label for="ncbi_organism">Organism</label>
+                <input type="text" id="ncbi_organism" name="ncbi_organism">
+            </div>
+
+            <div class="tab-content" id="tab-ensembl">
+                <label for="ensembl_id">Gene ID</label>
+                <input type="text" id="ensembl_id" name="ensembl_id">
+            </div>
+
+            <div class="advanced-options-toggle">
+                <button type="button" id="toggle-advanced">Advanced Options ▼</button>
+            </div>
+
+            <div class="advanced-options" id="advanced-options-panel">
+                <label for="spacer_length">Spacer Length</label>
+                <input type="number" id="spacer_length" name="spacer_length" value="9">
+
+                <label for="d_min">Min Distance</label>
+                <input type="number" id="d_min" name="d_min" value="5">
+
+                <label for="d_max">Max Distance</label>
+                <input type="number" id="d_max" name="d_max" value="50">
+
+                <label for="gc_min">Min GC Content</label>
+                <input type="number" step="0.01" id="gc_min" name="gc_min" value="0.30">
+
+                <label for="gc_max">Max GC Content</label>
+                <input type="number" step="0.01" id="gc_max" name="gc_max" value="0.70">
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-btn">Score Candidates</button>
+            <div id="loading-spinner" class="spinner hidden"></div>
+        </form>
+    </main>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

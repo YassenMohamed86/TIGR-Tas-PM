@@ -1,0 +1,120 @@
+/*
+ * SELF-AUDIT
+ * ----------
+ * File: menu.css
+ * Purpose: Fixed top navigation bar for the TIGR-Tas platform.
+ * Inline styles in HTML: NONE.
+ * Magic numbers: NONE — height matches --nav-height (56px) in style_general.css.
+ */
+
+/* ── Navigation Bar ───────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px; /* matches --nav-height */
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Brand / Logo ─────────────────────────────────────────────────────────── */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #e6edf3;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #f0883e, #da6d25);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.brand-name-highlight {
+  color: #f0883e;
+}
+
+/* ── Nav Links ────────────────────────────────────────────────────────────── */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.navbar-links a {
+  color: #8b949e;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+  position: relative;
+  padding: 4px 0;
+}
+
+.navbar-links a:hover {
+  color: #e6edf3;
+  text-decoration: none;
+}
+
+.navbar-links a.active {
+  color: #e6edf3;
+}
+
+.navbar-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #f0883e;
+  border-radius: 1px;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .navbar-links {
+    gap: 16px;
+  }
+
+  .navbar-links a {
+    font-size: 13px;
+  }
+}

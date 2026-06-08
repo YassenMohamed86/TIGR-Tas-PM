@@ -1,0 +1,161 @@
+/*
+ * SELF-AUDIT
+ * ----------
+ * File: tooltipster.css
+ * Purpose: Dark-themed tooltip component — positioning, arrow, transitions.
+ *          Vanilla CSS, no JS library dependency for styles.
+ * Inline styles in HTML: NONE.
+ * Magic numbers: NONE.
+ */
+
+/* ── Tooltip Trigger ──────────────────────────────────────────────────────── */
+.tooltip-trigger {
+  cursor: help;
+  border-bottom: 1px dotted #484f58;
+  position: relative;
+  display: inline;
+}
+
+/* ── Tooltip Container ────────────────────────────────────────────────────── */
+.tooltip {
+  position: absolute;
+  z-index: 5000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Tooltip Content ──────────────────────────────────────────────────────── */
+.tooltip-content {
+  background-color: #30363d;
+  color: #e6edf3;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  max-width: 300px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3);
+  word-wrap: break-word;
+}
+
+/* ── Arrow (bottom-pointing — tooltip appears above) ──────────────────────── */
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.tooltip-arrow-up {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #30363d;
+}
+
+.tooltip-arrow-down {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #30363d;
+}
+
+.tooltip-arrow-left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid #30363d;
+}
+
+.tooltip-arrow-right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #30363d;
+}
+
+/* ── CSS-only Tooltip (data-tooltip attribute) ────────────────────────────── */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  z-index: 5000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Tooltip bubble */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background-color: #30363d;
+  color: #e6edf3;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  max-width: 300px;
+  width: max-content;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3);
+  white-space: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Arrow */
+[data-tooltip]::before {
+  content: '';
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #30363d;
+}
+
+/* Show on hover */
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+[data-tooltip]:hover::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Tooltip for score explanations ───────────────────────────────────────── */
+.score-tooltip {
+  border-bottom: 1px dotted #484f58;
+  cursor: help;
+}
+
+/* ── Parameter-unresolved tooltip ─────────────────────────────────────────── */
+.param-unresolved {
+  color: #484f58;
+  font-style: italic;
+  cursor: help;
+  border-bottom: 1px dotted #484f58;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIGR-Tas Results</title>
+    <link rel="stylesheet" href="/static/css/style_general.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="/static/css/button.css">
+    <link rel="stylesheet" href="/static/css/results_table.css">
+    <link rel="stylesheet" href="/static/css/seq_overview.css">
+    <link rel="stylesheet" href="/static/css/tooltipster.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>TIGR-Tas Results</h1>
+    </nav>
+    <main>
+        <div class="summary-panel">
+            <p><strong>Sequence Length:</strong> {{ sequence_length }} bp</p>
+            <p><strong>Source:</strong> {{ sequence_source }}</p>
+            <p><strong>Pairs Found:</strong> {{ results|length }}</p>
+            <a href="/" class="back-button">Back to Input</a>
+            <button id="export-csv" class="submit-button">Export CSV</button>
+        </div>
+
+        <div class="seq-overview" id="seq-overview">
+            <div class="ruler"></div>
+            <div class="sequence-bar" id="sequence-bar" data-seq="{{ sequence_full }}"></div>
+        </div>
+        
+        <input type="text" id="filter-input" placeholder="Filter sequences...">
+
+        <div class="table-container">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Spacer A</th>
+                        <th>Spacer B</th>
+                        <th>Pos A</th>
+                        <th>Pos B</th>
+                        <th>Distance</th>
+                        <th>Strand A</th>
+                        <th>Strand B</th>
+                        <th>GC A</th>
+                        <th>GC B</th>
+                        <th>Geometry Score</th>
+                        <th>Cleavage Score</th>
+                        <th>Stability A</th>
+                        <th>Stability B</th>
+                        <th>Specificity A</th>
+                        <th>Specificity B</th>
+                        <th class="tooltip-trigger" title="Weighted by Shannon Entropy">Final Score</th>
+                        <th>Warnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr class="result-row" data-pos-a="{{ result.pos_a }}" data-pos-b="{{ result.pos_b }}" data-spacer-a="{{ result.spacer_a }}" data-spacer-b="{{ result.spacer_b }}">
+                        <td>{{ loop.index }}</td>
+                        <td class="sequence">{{ result.spacer_a }}</td>
+                        <td class="sequence">{{ result.spacer_b }}</td>
+                        <td>{{ result.pos_a }}</td>
+                        <td>{{ result.pos_b }}</td>
+                        <td>{{ result.distance }}</td>
+                        <td>{{ result.strand_a }}</td>
+                        <td>{{ result.strand_b }}</td>
+                        <td>{{ "%.2f"|format(result.gc_a) }}</td>
+                        <td>{{ "%.2f"|format(result.gc_b) }}</td>
+                        <td class="score-cell" data-score="{{ result.geometry_score }}">{{ "%.2f"|format(result.geometry_score) }}</td>
+                        <td class="score-cell" data-score="{{ result.cleavage_score }}">{{ "%.2f"|format(result.cleavage_score) }}</td>
+                        <td class="score-cell" data-score="{{ result.stability_score_a }}">{{ "%.2f"|format(result.stability_score_a) }}</td>
+                        <td class="score-cell" data-score="{{ result.stability_score_b }}">{{ "%.2f"|format(result.stability_score_b) }}</td>
+                        <td class="score-cell" data-score="{{ result.specificity_score_a }}">{{ "%.2f"|format(result.specificity_score_a) }}</td>
+                        <td class="score-cell" data-score="{{ result.specificity_score_b }}">{{ "%.2f"|format(result.specificity_score_b) }}</td>
+                        <td class="score-cell" data-score="{{ result.final_score }}">{{ "%.2f"|format(result.final_score) if result.final_score is not none else 'N/A' }}</td>
+                        <td class="warning-cell">
+                            {% if result.assumption_warnings %}
+                                <span class="warning-icon tooltip-trigger" title="{{ result.assumption_warnings|join(', ') }}">⚠ {{ result.assumption_warnings|length }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="detail-panel" class="detail-panel hidden">
+            <h3>Pair Details</h3>
+            <div id="detail-content"></div>
+        </div>
+    </main>
+    <script src="/static/js/results.js"></script>
+</body>
+</html>
